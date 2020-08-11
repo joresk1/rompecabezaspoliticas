@@ -1,0 +1,16 @@
+/*Hoja de estilos*/
+#entorno {
+	display: block;
+	margin: 0 auto;
+}
+
+#fondo {
+	opacity: 0.3;
+}
+
+body {
+	font-family: Arial, Helvetica, Sans-serif;
+	color: #FF5733;
+	background-color:white ;
+	text-align: center;
+  }
