@@ -90,7 +90,6 @@ function testing() {
 	}
 	if(bien_ubicada == 9){
 		win.play();
-		confirm("Ganaste!!! Felicidades!!! Compartí tu resultado en nuestra página");
 	}
 }
 
