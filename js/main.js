@@ -10,7 +10,7 @@ for(var i=0;i<piezas.length;i++){
 	piezas[i].setAttribute("height",tamHeight[i]);
 	piezas[i].setAttribute("x", Math.floor((Math.random() * 10) + 1));
 	piezas[i].setAttribute("y", Math.floor((Math.random() * 409) + 1));
-	piezas[i].setAttribute("onmousedown","seleccionarElemento(evt)");
+	piezas[i].setAttribute("ontouchstart","seleccionarElemento(evt)");
 }
 
 var elementSelect = 0;  
@@ -21,33 +21,33 @@ var currentPosY = 0;
 
 function seleccionarElemento(evt) {
 	elementSelect = reordenar(evt);
-	currentX = evt.clientX;        
-	currentY = evt.clientY;
+	currentX = evt.touches[0].clientX;        
+	currentY = evt.touches[0].clientY;
 	currentPosx = parseFloat(elementSelect.getAttribute("x"));     
 	currentPosy = parseFloat(elementSelect.getAttribute("y"));
-	elementSelect.setAttribute("onmousemove","moverElemento(evt)");
+	elementSelect.setAttribute("ontouchmove","moverElemento(evt)");
 }
 
 function moverElemento(evt){
-	var dx = evt.clientX - currentX;
-	var dy = evt.clientY - currentY;
+	var dx = evt.touches[0].clientX - currentX;
+	var dy = evt.touches[0].clientY - currentY;
 	currentPosx = currentPosx + dx;
 	currentPosy = currentPosy + dy;
 	elementSelect.setAttribute("x",currentPosx);
 	elementSelect.setAttribute("y",currentPosy);
-	currentX = evt.clientX;        
-	currentY = evt.clientY;
-	elementSelect.setAttribute("onmouseout","deseleccionarElemento(evt)");
-	elementSelect.setAttribute("onmouseup","deseleccionarElemento(evt)");
+	currentX = evt.touches[0].clientX;        
+	currentY = evt.touches[0].clientY;
+	elementSelect.setAttribute("ontouchcancel","deseleccionarElemento(evt)");
+	elementSelect.setAttribute("ontouchend","deseleccionarElemento(evt)");
 	iman();
 }
 
 function deseleccionarElemento(evt){
 	testing();
 	if(elementSelect != 0){			
-		elementSelect.removeAttribute("onmousemove");
-		elementSelect.removeAttribute("onmouseout");
-		elementSelect.removeAttribute("onmouseup");
+		elementSelect.removeAttribute("ontouchmove");
+		elementSelect.removeAttribute("ontouchcancel");
+		elementSelect.removeAttribute("ontouchend");
 		elementSelect = 0;
 	}
 }
@@ -90,6 +90,7 @@ function testing() {
 	}
 	if(bien_ubicada == 9){
 		win.play();
+		confirm("Ganaste!!! Felicidades!!! Compartí tu resultado en nuestra página");
 	}
 }
 
